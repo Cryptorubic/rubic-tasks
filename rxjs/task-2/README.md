@@ -5,4 +5,4 @@
 
 ### Формат ответа
 
-Реализовать функцию `getUserFavoriteTokenImage` вместо `TODO`
+Реализовать функцию `getUserFavoriteTokenImage` вместо `TODO`.
