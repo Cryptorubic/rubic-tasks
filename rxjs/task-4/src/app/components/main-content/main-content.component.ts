@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {TokenInfoService} from "../../services/token-info.service";
 
 @Component({
@@ -9,8 +9,14 @@ import {TokenInfoService} from "../../services/token-info.service";
 })
 export class MainContentComponent implements OnInit {
 
-  constructor(private readonly tokenInfoService: TokenInfoService) {
-    this.tokenInfoService.getTokenData().subscribe(console.log)
+  public price: number | undefined;
+
+  constructor(private readonly cdr: ChangeDetectorRef,
+              private readonly tokenInfoService: TokenInfoService) {
+    this.tokenInfoService.tokenData.subscribe(data => {
+      this.price = data.price;
+      this.cdr.detectChanges();
+    });
   }
 
   ngOnInit(): void {

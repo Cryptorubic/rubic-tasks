@@ -13,7 +13,7 @@ export type GetUserNameFn = (userId: number) => Observable<UserName>;
 
 function getUserById(userId: number): Observable<User> {
    return forkJoin(getUserTokens(userId), getUserWallets(userId), getUserName(userId)).pipe(
-       map(res => res.reduce((acc, val) => Object.assign(acc, val), {}))
+       map(res => res.reduce((acc, val) => Object.assign(acc, val), {}) as User)
    )
 }
 
