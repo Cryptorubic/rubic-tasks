@@ -10,7 +10,6 @@ export type GetTokenByAddressFn = (address: string) => Observable<Token>;
 export type GetTokenImgBySymbolFn = (tokenSymbol: string) => Observable<Image>;
 
 
-
 function getUserFavoriteTokenImage(userId): Observable<Image> {
    return getUserById(userId).pipe(
       switchMap(user => getTokenByAddress(user.favoriteTokenAddress)),
