@@ -1,5 +1,5 @@
 import {Observable, of} from "rxjs";
-import {getUserTokens, getUserWallets, getUserName} from './utils';
+import {getUserTokens, getUserWallets, getUserName} from './utils.js';
 
 export interface User { userId: number, name: string, tokens: string[], wallets: string[] }
 export interface UserTokens { userId: number; tokens: string[] }
