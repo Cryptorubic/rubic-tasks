@@ -1,5 +1,5 @@
-import {Observable, of} from "rxjs";
-import {getUserTokens, getUserWallets, getUserName} from './utils';
+import {forkJoin, map, Observable, of} from "rxjs";
+import {getUserTokens, getUserWallets, getUserName} from './utils.js';
 
 export interface User { userId: number, name: string, tokens: string[], wallets: string[] }
 export interface UserTokens { userId: number; tokens: string[] }
@@ -12,8 +12,9 @@ export type GetUserNameFn = (userId: number) => Observable<UserName>;
 
 
 function getUserById(userId: number): Observable<User> {
-   // TODO
-   return of(null);
+   return forkJoin(getUserTokens(userId), getUserWallets(userId), getUserName(userId)).pipe(
+       map(res => res.reduce((acc, val) => Object.assign(acc, val), {}))
+   )
 }
 
 const testUserId = 1;

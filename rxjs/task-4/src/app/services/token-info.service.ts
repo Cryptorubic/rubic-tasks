@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import getTokenInfo from "../utils/token-info-mock";
-import {Observable} from "rxjs";
+import {BehaviorSubject, interval, Observable, Subject, timer} from "rxjs";
 import {TokenInfo} from "../models/TokenInfo";
 
 @Injectable({
@@ -8,9 +8,16 @@ import {TokenInfo} from "../models/TokenInfo";
 })
 export class TokenInfoService {
 
-  constructor() { }
+  private tokenData$ = new Subject<TokenInfo>();
+
+  public get tokenData(): Observable<TokenInfo> {
+    return this.tokenData$.asObservable();
+  }
+
+
+  constructor() {}
 
   private getTokenInfo(): Observable<TokenInfo> {
-    return getTokenInfo();
+    return getTokenInfo().pipe();
   }
 }

@@ -1,5 +1,5 @@
-import {Observable, of} from "rxjs";
-import {getUserById, getTokenByAddress, getTokenImgBySymbol} from "./utils";
+import {forkJoin, Observable, of, switchMap} from "rxjs";
+import {getUserById, getTokenByAddress, getTokenImgBySymbol} from "./utils.js";
 
 export interface Token { address: string, symbol: string }
 export interface User { id: number, favoriteTokenAddress: string; name: string }
@@ -12,8 +12,10 @@ export type GetTokenImgBySymbolFn = (tokenSymbol: string) => Observable<Image>;
 
 
 function getUserFavoriteTokenImage(userId): Observable<Image> {
-   // TODO
-   return of(null);
+   return getUserById(userId).pipe(
+      switchMap(user => getTokenByAddress(user.favoriteTokenAddress)),
+      switchMap(token => getTokenImgBySymbol(token.symbol))
+   )
 }
 
 const testUserId = 1;

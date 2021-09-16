@@ -1,4 +1,5 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {TokenInfoService} from "../../services/token-info.service";
 
 @Component({
   selector: 'app-main-content',
@@ -8,7 +9,9 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 })
 export class MainContentComponent implements OnInit {
 
-  constructor() { }
+  constructor(private readonly tokenInfoService: TokenInfoService) {
+    this.tokenInfoService.getTokenData().subscribe(console.log)
+  }
 
   ngOnInit(): void {
   }
