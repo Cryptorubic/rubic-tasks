@@ -13,8 +13,7 @@ export class MainContentComponent implements OnInit {
 
   public tokenData$: Observable<TokenInfo>;
 
-  constructor(private readonly cdr: ChangeDetectorRef,
-              private readonly tokenInfoService: TokenInfoService) {
+  constructor(private readonly tokenInfoService: TokenInfoService) {
 
     this.tokenData$ = this.tokenInfoService.tokenData;
   }
