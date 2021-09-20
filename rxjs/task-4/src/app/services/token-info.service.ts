@@ -20,9 +20,11 @@ export class TokenInfoService {
   }
 
   constructor() {
-    interval(3000).pipe(map(() => this.getTokenInfo()))
-        .pipe(switchMap(data => data))
-        .subscribe((data: TokenInfo) => this.tokenData$.next(data));
+    interval(3000)
+        .pipe(
+          map(() => this.getTokenInfo()),
+          switchMap(data => data)
+        ).subscribe((data: TokenInfo) => this.tokenData$.next(data));
   }
 
   /**
