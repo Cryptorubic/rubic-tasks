@@ -1,5 +1,7 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {TokenInfoService} from "../../services/token-info.service";
+import {Observable} from "rxjs";
+import {TokenInfo} from "../../models/TokenInfo";
 
 @Component({
   selector: 'app-banner',
@@ -7,20 +9,12 @@ import {TokenInfoService} from "../../services/token-info.service";
   styleUrls: ['./banner.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BannerComponent implements OnInit {
+export class BannerComponent {
 
-  public holders: number | undefined;
+  public tokenData$: Observable<TokenInfo>;
 
   constructor(private readonly cdr: ChangeDetectorRef,
               private readonly tokenInfoService: TokenInfoService) {
-    this.tokenInfoService.tokenData.subscribe(data => {
-      this.holders = data.holdersNumber
-      console.log(this.holders);
-      this.cdr.detectChanges();
-    });
+    this.tokenData$ = this.tokenInfoService.tokenData;
   }
-
-  ngOnInit(): void {
-  }
-
 }

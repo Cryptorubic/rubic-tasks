@@ -1,5 +1,7 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {TokenInfoService} from "../../services/token-info.service";
+import {Observable} from "rxjs";
+import {TokenInfo} from "../../models/TokenInfo";
 
 @Component({
   selector: 'app-main-content',
@@ -9,14 +11,12 @@ import {TokenInfoService} from "../../services/token-info.service";
 })
 export class MainContentComponent implements OnInit {
 
-  public price: number | undefined;
+  public tokenData$: Observable<TokenInfo>;
 
   constructor(private readonly cdr: ChangeDetectorRef,
               private readonly tokenInfoService: TokenInfoService) {
-    this.tokenInfoService.tokenData.subscribe(data => {
-      this.price = data.price;
-      this.cdr.detectChanges();
-    });
+
+    this.tokenData$ = this.tokenInfoService.tokenData;
   }
 
   ngOnInit(): void {

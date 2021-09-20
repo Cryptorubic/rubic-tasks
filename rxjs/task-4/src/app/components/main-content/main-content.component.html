@@ -1,3 +1,7 @@
 <main>
-    Приобретайте наш токен по выгодной цене: ${{ price }}!
+    <ng-container *ngIf="(tokenData$ | async)?.price as tokenPrice; else loading">
+        Приобретайте наш токен по выгодной цене: ${{ tokenPrice }}!
+    </ng-container>
 </main>
+
+<ng-template #loading>Loading...</ng-template>
