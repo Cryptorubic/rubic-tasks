@@ -11,7 +11,7 @@ import {TokenInfo} from "../../models/TokenInfo";
 })
 export class MainContentComponent implements OnInit {
 
-  public tokenData$: Observable<TokenInfo>;
+  public tokenData$: Observable<TokenInfo | undefined>;
 
   constructor(private readonly tokenInfoService: TokenInfoService) {
 

@@ -10,20 +10,20 @@ import { map, switchMap } from "rxjs/operators";
 
 export class TokenInfoService {
 
-  private tokenData$ = new BehaviorSubject<TokenInfo>(undefined);
+  private tokenData$ = new BehaviorSubject<TokenInfo | undefined>(undefined);
 
   /**
    * Get token data.
    * @return Observable token data.
    */
-  public get tokenData(): Observable<TokenInfo> {
+  public get tokenData(): Observable<TokenInfo | undefined> {
     return this.tokenData$.asObservable();
   }
 
   constructor() {
     interval(3000)
         .pipe(
-          switchMap(data => this.getTokenInfo())
+          switchMap(this.getTokenInfo)
         ).subscribe((data: TokenInfo) => this.tokenData$.next(data));
   }
 
