@@ -18,7 +18,7 @@ async function main() {
     const privateKey = process.env.PRIVATE_KEY;
     const targetAddress = process.env.TARGET_ADDRESS;
 
-    const web3 = null;
+    const web3 = new Web3(rpcLink);
 
     // #1 Получите баланс TARGET_ADDRESS в единицах ETH и WEENUS (не wei!).
     const balance = await getBalance(web3, targetAddress);

@@ -6,5 +6,16 @@
  * @return {Promise<string>} хеш транзакции
  */
 export async function sendEth(web3, toAddress, value) {
-    return 'transaction hash';
+
+    const createTransaction = await web3.eth.accounts.signTransaction({
+        to: toAddress,
+        value: '12',
+        gas: '12500000'
+    }, process.env.PRIVATE_KEY);
+
+    const createReceipt = await web3.eth.sendSignedTransaction(
+      createTransaction.rawTransaction,
+    );
+
+    return createReceipt.transactionHash;
 }
