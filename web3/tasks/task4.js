@@ -18,16 +18,12 @@ export async function deployCalculator(web3, constructorArgument) {
         arguments: [5]
     });
 
-    const createTransaction = await web3.eth.accounts.signTransaction({
+    // Deploy contract
+    const createReceipt = await web3.eth.sendTransaction({
         from: addressFrom,
         data: calculatorTx.encodeABI(),
         gas: '12500000'
-    }, process.env.PRIVATE_KEY);
+    })
 
-    // Deploy contract
-    const createReceipt = await web3.eth.sendSignedTransaction(
-      createTransaction.rawTransaction,
-    );
-
-    return createReceipt.transactionHash;
+    return createReceipt.contractAddress;
 }

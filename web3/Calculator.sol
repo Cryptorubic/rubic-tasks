@@ -4,7 +4,7 @@ pragma solidity ^0.6.10;
 contract Incrementer {
   uint256 public base;
 
-  event baseChanged(uint256 prevBase);
+  event BaseChanged(uint256 prevBase);
 
   constructor(uint256 _initialNumber) public {
     base = _initialNumber;
@@ -15,7 +15,7 @@ contract Incrementer {
   }
 
   function changeBase(uint256 _value) public {
-    emit baseChanged(base);
+    emit BaseChanged(base);
 
     base = _value;
   }
