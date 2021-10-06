@@ -7,7 +7,8 @@ import calculatorAbi from '../abi/calculator-abi.js';
  * @return {Promise<{gasInEth: number, previousBase: number, gas: number}>} извлеченные данные
  */
 export async function extractReceipt(web3, receipt) {
-  const gasInEth = web3.utils.fromWei(web3.utils.toBN(receipt.cumulativeGasUsed), 'ether');
+  const gasFee = receipt.gasUsed * receipt.effectiveGasPrice;
+  const gasInEth = web3.utils.fromWei(web3.utils.toBN(gasFee), 'ether');
 
   return {
     gas: receipt.gasUsed,

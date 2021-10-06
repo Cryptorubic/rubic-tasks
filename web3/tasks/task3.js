@@ -8,7 +8,7 @@ import tokenAbi from '../abi/erc20-abi.js';
  * @return {Promise<string>} хеш транзакции
  */
 export async function sendWeenus(web3, toAddress, value) {
-  const fromAddress = '0x9471D35e8F83e60Cdaa81da1393Eb02ce92596f5';
+  const fromAddress = web3.eth.accounts.wallet[0].address;
 
   const tokenAddress = '0xaff4481d10270f50f203e0763e2597776068cbc5';
 
@@ -17,7 +17,7 @@ export async function sendWeenus(web3, toAddress, value) {
   const receipt = await tokenContract.methods.transfer(toAddress, '10').send({
     from: fromAddress,
     to: toAddress,
-    gas: '12500000',
+    gas: '40000',
   })
 
   return receipt.transactionHash;
